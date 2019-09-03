@@ -1,4 +1,5 @@
-import tcod as libtcod
+import libtcodpy as libtcod
+
 from input_handler import handle_keys
 
 
@@ -9,10 +10,11 @@ def main():
     player_x = int(screen_width / 2)
     player_y = int(screen_height / 2)
 
-    libtcod.console_set_custom_font('assets/arial10x10.png', libtcod.FONT_TYPE_GRAYSCALE | libtcod.FONT_LAYOUT_TCOD)
+    libtcod.console_set_custom_font('assets/arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
+
     libtcod.console_init_root(screen_width, screen_height, 'Babbys furst gam', False)
 
-    con = libtcod.console_new(screen_height, screen_height)
+    con = libtcod.console_new(screen_width, screen_height)
 
     key = libtcod.Key()
     mouse = libtcod.Mouse()
@@ -27,23 +29,23 @@ def main():
 
         libtcod.console_put_char(con, player_x, player_y, ' ', libtcod.BKGND_NONE)
 
-    action = handle_keys(key)
+        action = handle_keys(key)
 
-    move = action.get('move')
-    exit = action.get('exit')
-    fullscreen = action.get('fullscreen')
+        move = action.get('move')
+        exit = action.get('exit')
+        fullscreen = action.get('fullscreen')
 
-    if move:
-        dx, dy = move
-        player_x += dx
-        player_y += dy
+        if move:
+            dx, dy = move
+            player_x += dx
+            player_y += dy
 
-    if exit:
-        return True
-    
-    if fullscreen:
-        libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())
+        if exit:
+            return True
+
+        if fullscreen:
+            libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())
 
 
 if __name__ == '__main__':
-    main()
+     main()
